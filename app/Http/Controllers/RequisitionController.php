@@ -46,6 +46,16 @@ class RequisitionController extends Controller
         $amount = $request->amount;
         //dd($request->is_exit);
 
+        
+        $stock = Stock::where('product_id', $request->product_id)->first();
+        
+        //verifica se existe o produto requisitado cadastrado no estoque
+        if(!$stock) {
+                    
+            return redirect()->back()->withErrors(['error' => 'Não há produtos cadastrados para esse tipo de requisição']);
+        
+        }
+
         if($request->is_exit) {
             //verifica se há quantidade disponível para produto simples
             $stock = Stock::where('product_id', $request->product_id)->first();

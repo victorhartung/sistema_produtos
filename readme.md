@@ -14,7 +14,7 @@
 
 ## Considerações:
 
-- Toda a documentação (arquivos de sql, diagrama uml e diagrama entidade relacionamento se encontra na pasta "documents").
+- Toda a documentação (arquivos de sql, diagrama uml e diagrama entidade relacionamento se encontram na pasta "documents").
 - Usar php artisan db:seed --class=UserSeeder para criação de usuário com nível admin, mas se preferir usar opção registrar na tela inicial virá como usuário comum como padrão.
 - ACL foi implementado com níveis admin e user.
 - Não foi usado migrations, todas as tabelas foram criadas com sql puro que se encontram em "documents".
