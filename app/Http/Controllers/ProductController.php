@@ -215,11 +215,22 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        CompositeProduct::where('simple_id', $product->id)->delete();
+    
+        try {
+            
+            CompositeProduct::where('simple_id', $product->id)->delete();
 
-        $product->delete();
+            $product->delete();
 
-        return redirect()->route('products.index')->with('success', 'Produto apagado com sucesso!');
+            return redirect()->route('products.index')->with('success', 'Produto apagado com sucesso!');
+        
+        }catch(\Exception $e) {
+
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        
+        }
+
+        
     }
 
     /**

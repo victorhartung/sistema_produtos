@@ -11,15 +11,17 @@ class StockExitsReport extends NewExcelFile
     protected $startDate;
     protected $endDate;
 
-    public function __construct($startDate, $endDate)
-    {
+    public function __construct($startDate, $endDate) {
+        
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+    
     }
 
-    public function getFilename()
-    {
+    public function getFilename() {
+        
         return 'stock_exits.xlsx';
+    
     }
 
     public function getData() {
@@ -63,17 +65,13 @@ class StockExitsReport extends NewExcelFile
 
                 ORDER BY
                     product_name";
-                 
-        
+                       
         $data = DB::select(DB::raw($sql), [
             $this->startDate, $this->endDate, $this->startDate, $this->endDate
         ]);
     
         return collect($data)->map(function($rows) {
             return (array) $rows;
-        });
-        
+        });       
     }
-
-
 }

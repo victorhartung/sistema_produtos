@@ -86,5 +86,20 @@ class Product extends Model
     
     }
 
+     // Verifica se há registros relacionados nas tabelas requisicoes ou estoque se houver registro, impede a exclusão
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($product) {
+           
+            if ($product->requisitions()->exists() || $product->stocks()->exists()) {
+
+                throw new \Exception('Produto não pode ser excluído pois está referenciado em requisições ou estoque.');
+            
+            }
+        });
+    }
+
 
 }
