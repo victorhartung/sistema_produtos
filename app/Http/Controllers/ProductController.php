@@ -144,7 +144,9 @@ class ProductController extends Controller
         ];
 
         $feedback = [
+           
             'required' => 'O campo :attribute é obrigatório'
+        
         ];
 
         $request->validate($rules, $feedback);
@@ -155,7 +157,9 @@ class ProductController extends Controller
 
         //valida se o preço de venda é menor que o preço de custo
         if($retailPrice < $costPrice) {
+            
             return redirect()->back()->withErrors(['retail_price' => 'O preço de venda deve ser maior que o preço de custo']);
+        
         }
 
         $product->name = $request->name;
@@ -186,7 +190,6 @@ class ProductController extends Controller
         $product->save();
 
         CompositeProduct::where('composite_id', $product->id)->delete();
-
         //se o produto for composto, atualiza como produto composto
         if (!empty($request->composite)) {
             

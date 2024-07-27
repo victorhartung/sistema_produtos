@@ -19,7 +19,8 @@
 - ACL foi implementado com níveis admin e user.
 - Não foi usado migrations, todas as tabelas foram criadas com sql puro que se encontram em "documents".
 - Foi usado trigger para melhorar performance e integridade do banco.
-- Os relatórios estão sendo exportados via excel
+- Os relatórios estão sendo exportados em excel.
+- Apenas usuários nivel "admin" podem acessar a rota de usuários.
 
 ## 1º - Clonar o repositório
 ```

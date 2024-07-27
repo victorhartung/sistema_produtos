@@ -30,6 +30,7 @@ class UserController extends Controller
             'level' => 'required|in:user,admin',
         ]);
 
+        
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -58,9 +59,15 @@ class UserController extends Controller
     }
 
     public function destroy(User $user) {
+        try{
         
-        $user->delete();
+            $user->delete();
+            return redirect()->route('users.index')->with('success', 'Usuário excluído com sucesso.');
+        
+        }catch(\Exception $e) {
 
-        return redirect()->route('users.index')->with('success', 'Usuário excluído com sucesso.');
+            return redirect()->back()->withErrors(['error' => 'Usuário está atribuido a alguma requisição, não foi possível excluir este usuário.']);
+        }
+        
     }
 }
