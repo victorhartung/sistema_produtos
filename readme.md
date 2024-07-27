@@ -43,12 +43,19 @@ php artisan server
 ```
 
 ## Imagens
-
-<img src="public/img/Produtos.jpeg">
+<p>Página de Produtos</p>
+<img src="public/img/Produto.jpeg">
 <hr>
+<p>Página de Estoque</p>
 <img src="public/img/Estoque.jpeg">
 <hr>
-<img src="public/img/Requisições.jpeg">
-
+<p>Página de Requisições</p>
+<img src="public/img/Requisição.jpeg">
+<hr>
+<p>Relatório de Entrada</p>
+<img src="public/img/Entrada.jpeg">
+<hr>
+<p>Relatório de Saída</p>
+<img src="public/img/Saida.jpeg">
 
 
