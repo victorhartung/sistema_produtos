@@ -58,7 +58,14 @@
         var table = $('#requisition_table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('requisitions.getData') }}",
+                ajax: {
+                        url: "{{ route('requisitions.getData') }}",
+                        //debugger
+                        dataSrc:function(json) {
+                            console.log(json);
+                            return json.data
+                        }
+                },
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'user.name', name: 'user.name' },
@@ -70,12 +77,8 @@
                 ],
                 
                 drawCallback: function(settings) {
-                    $('tr').find('td:eq(1)').addClass('text-center')
-                    $('tr').find('td:eq(2),td:eq(3)').mask("#.##0,00", {
-                        reverse: true
-                    }).addClass('text-right')
 
-                    //confirmação de exclusão com a biblioteca swal
+                    //confirmação de exclusão com a biblioteca sweetalert
                     $('.delete').submit(function() {
                         Swal.fire({
                             title: 'Atenção!',
@@ -112,7 +115,6 @@
                 },
             });
         });
-
 
     </script>
 

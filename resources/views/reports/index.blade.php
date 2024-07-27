@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-6">
             <h2>Entrada de Estoque</h2>
-            <form action="{{ route('report.entry_stock') }}" method="GET">
+            <form id="form-entry" action="{{ route('get_excel_entries') }}" method="get">
                 <div class="form-group">
                     <label for="start_date_entrada">Data Inicial</label>
                     <input type="date" class="form-control" id="start_date_entrada" name="start_date" required>
@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-6">
             <h2>Saída de Estoque</h2>
-            <form action="{{ route('report.exit_stock') }}" method="GET">
+            <form action="{{ route('get_excel_exits') }}" method="GET">
                 <div class="form-group">
                     <label for="start_date_saida">Data Inicial</label>
                     <input type="date" class="form-control" id="start_date_saida" name="start_date" required>

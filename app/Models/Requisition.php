@@ -17,16 +17,17 @@ class Requisition extends Model
     
     protected $fillable = ['id', 'user_id', 'product_id', 'amount', 'requisition_date', 'is_exit'];
 
-
- 
-
     //relacionamento com usuário
     public function user() {
+        
         return $this->belongsTo(User::class);
+    
     }
 
    //relacionamento com produto
     public function product() {
+        
         return $this->belongsTo(Product::class);
+    
     }
 }

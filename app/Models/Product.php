@@ -31,18 +31,24 @@ class Product extends Model
     ];
 
    
+    // Relacionamento 1 pra muitos com requisição
     public function requisitions(){
         
         return $this->hasMany(Requisition::class);
     
     }
     
+    // Relacionamento 1 pra muitos com estoque
     public function stocks(){
+        
         return $this->hasMany(Stock::class);
+    
     }
 
     public function compositeProducts() {
+        
         return $this->hasMany(CompositeProduct::class, 'composite_id', 'id');
+    
     }
 
     public function productsFather(){
@@ -52,12 +58,12 @@ class Product extends Model
     }
 
      /**
-     * Mutator para calculo de custo dos produtos compostos
+     * Mutator para cálculo de custo dos produtos compostos baseado nos produtos simples
      *
      * @return string
      */
-    public function getCostPriceAttribute($value)
-    {
+    public function getCostPriceAttribute($value) {
+        
         $costPrice = 0;
 
         if ($this->attributes['composite']) {
@@ -74,9 +80,10 @@ class Product extends Model
         return number_format((float)$costPrice, 2, '.', ''); // duas casas decimais
     }
 
-    public function getRetailPriceAttribute($value)
-    {
+    public function getRetailPriceAttribute($value) {
+        
         return number_format((float)$value, 2, '.', ''); // duas casas decimais
+    
     }
 
 

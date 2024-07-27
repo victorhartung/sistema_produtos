@@ -14,17 +14,21 @@ use App\Models\Stock;
 class RequisitionController extends Controller
 {
     public function index() {
+        
         return view('requisitions.index');
+    
     }
 
     public function create() {
+        
         $users = User::all();
         $products = Product::all();
         return view('requisitions.create', compact('users', 'products'));
+    
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+        
         $request->validate([
             'user_id' => 'required',
             'product_id' => 'required',
@@ -43,7 +47,6 @@ class RequisitionController extends Controller
         //dd($request->is_exit);
 
         if($request->is_exit) {
-            
             //verifica se há quantidade disponível para produto simples
             $stock = Stock::where('product_id', $request->product_id)->first();
             
@@ -54,10 +57,15 @@ class RequisitionController extends Controller
 
             //se for composto ele verifica os componentes
             if($compositeProducts->isNotEmpty()) {
+                
                 foreach($compositeProducts as $component) {
+                    
                     $componentStock = Stock::where('product_id', $component->simple_id)->first();
+                    
                     if (!$componentStock || $componentStock->amount < $amount * $component->amount) {
+                        
                         return redirect()->back()->withErrors(['error' => 'Estoque insuficiente para o componente do produto composto.']);
+                    
                     }
                 }
             }else {  
@@ -72,23 +80,24 @@ class RequisitionController extends Controller
        
         Requisition::create($request->all());
         
-        return redirect()->route('requisitions.index')->with('success', 'Requisition created successfully.');
+        return redirect()->route('requisitions.index')->with('success', 'Requisição feita com sucesso!');
     }
 
-    public function show(Requisition $requisition)
-    {
+    public function show(Requisition $requisition) {
+        
         return view('requisitions.show', compact('requisition'));
+    
     }
 
-    public function edit(Requisition $requisition)
-    {
+    public function edit(Requisition $requisition) {
+        
         $users = User::all();
         $products = Product::all();
         return view('requisitions.edit', compact('requisition', 'users', 'products'));
+    
     }
 
-    public function update(Request $request, Requisition $requisition)
-    {
+    public function update(Request $request, Requisition $requisition) {
         $request->validate([
             'user_id' => 'required',
             'product_id' => 'required',
@@ -120,36 +129,41 @@ class RequisitionController extends Controller
              ->get();
  
              //se for composto ele verifica os componentes
-             if($compositeProducts->isNotEmpty()) {
-                 foreach($compositeProducts as $component) {
-                     $componentStock = Stock::where('product_id', $component->simple_id)->first();
-                     if (!$componentStock || $componentStock->amount < $amount * $component->amount) {
-                         return redirect()->back()->withErrors(['error' => 'Estoque insuficiente para o componente do produto composto.']);
-                     }
+            if($compositeProducts->isNotEmpty()) {
+                 
+                foreach($compositeProducts as $component) {
+                     
+                    $componentStock = Stock::where('product_id', $component->simple_id)->first();
+                    
+                    if (!$componentStock || $componentStock->amount < $amount * $component->amount) {
+                        
+                        return redirect()->back()->withErrors(['error' => 'Estoque insuficiente para o componente do produto composto.']);
+                    
+                    }
                  }
-             }else {  
+            }else {  
                  //validação do produto simples
                  if(!$stock || $stock->amount < $amount) {
                      
                      return redirect()->back()->withErrors(['error' => 'Estoque insuficiente para essa requisição de saída']);
                  
-                 }
-             }      
-         }
+                }
+            }      
+        }
 
         $requisition->update($request->all());
         return redirect()->route('requisitions.index')->with('success', 'Requisição atualizada com sucesso.');
     }
 
-    public function destroy(Requisition $requisition)
-    {
+    public function destroy(Requisition $requisition) {
+        
         $requisition->delete();
         return redirect()->route('requisitions.index')->with('success', 'Requisição excluida com sucesso.');
+    
     }
 
     //Datatables serverside
-    public function getData()
-    {
+    public function getData() {
         $requisitions = Requisition::with('user', 'product')->get();
         
         //dd($requisitions);

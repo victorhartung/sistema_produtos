@@ -55,6 +55,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('reports.index')}}">Relatórios</a>
                             </li>
+                            {{-- Apenas usuário nivel admin pode controlar os usuários do banco de dados --}}
                         @if(auth()->check() && auth()->user()->level ==='admin')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('users.index')}}">Usuários</a>
@@ -83,7 +84,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Deslogar
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -124,7 +125,7 @@
         $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                            'content') //Token de autenticacao no header do ajax
+                            'content') //Token de autenticação no header do ajax
                     },
                 });
     </script>

@@ -19,13 +19,15 @@ class CompositeProduct extends Model
     ];
 
     //relacionamento N:N
-    public function product()
-    {
+    public function product(){
+        
         return $this->belongsTo(Product::class, 'id', 'composite_id');
     
     }
 
     public function simple() {
+        
         return $this->hasOne(Product::class, 'id', 'simple_id');
+    
     }
 }

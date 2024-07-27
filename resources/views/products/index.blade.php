@@ -57,24 +57,12 @@
                 serverSide: true,
                 dom: "l<'card't><'row'<'col-sm-5'i><'col-sm-7'p>>",
                 ajax: "{{ route('products.table') }}",
-                columns: [{
-                        data: 'name'
-                    },
-                    {
-                        data: 'type',
-                        searchable: false
-                    },
-                    {
-                        data: 'cost_price'
-                    },
-                    {
-                        data: 'retail_price'
-                    },
-                    {
-                        data: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
+                columns: [
+                    {data: 'name'},
+                    {data: 'type', searchable: false},
+                    {data: 'cost_price'},
+                    {data: 'retail_price'},
+                    {data: 'action', orderable: false, searchable: false},
                 ],
                 drawCallback: function(settings) {
                     $('tr').find('td:eq(1)').addClass('text-center')
@@ -82,7 +70,7 @@
                         reverse: true
                     }).addClass('text-right')
 
-                    //confirmação de exclusão com a biblioteca swal
+                    //confirmação de exclusão com a biblioteca sweetalert
                     $('.delete').submit(function() {
                         Swal.fire({
                             title: 'Atenção!',

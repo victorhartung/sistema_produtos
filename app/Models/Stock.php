@@ -15,9 +15,7 @@ class Stock extends Model
      */
     public $timestamps = false;
     
-    protected $fillable = ['product_id', 'amount'];
-
-   
+    protected $fillable = ['product_id', 'amount']; 
 
     //relacionamento com produto
     public function product()

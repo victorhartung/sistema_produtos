@@ -21,8 +21,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
 Route::middleware(['auth'])->group(function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -44,7 +42,10 @@ Route::middleware(['auth'])->group(function() {
 
     //Rotas para relatório
     Route::get('/relatorios', 'ReportController@index')->name('reports.index');
-    Route::get('/relatorio/entrada-estoque', 'ReportController@getEntryStockReport')->name('report.entry_stock');
-    Route::get('/relatorio/saida-estoque', 'ReportController@getExitStockReport')->name('report.exit_stock');
+    // Route::get('/relatorio/entrada-estoque', 'ReportController@getEntryStockReport')->name('report.entry_stock');
+    // Route::get('/relatorio/saida-estoque', 'ReportController@getExitStockReport')->name('report.exit_stock');
+
+    Route::get('/export-stock-entries', 'ReportController@exportStockEntries')->name('get_excel_entries');
+    Route::get('/export-stock-exits', 'ReportController@exportStockExits')->name('get_excel_exits');
 
 });

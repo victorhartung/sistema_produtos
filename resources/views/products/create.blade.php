@@ -87,12 +87,13 @@
                                         {{ $product->name }}
                         
                                     </td>
-                                    <td class="text-center">{{ $product->cost_price }}</td>
+                                    <td class="text-center">{{$product->cost_price}}</td>
                                     <td>
                                         <input type="number" class="form-control m-auto shadow-sm"
                                             name="products[{{ $k }}]" value="{{ old('products')[$k] }}"
                                             min="1" style="max-width:10rem"> 
                                     </td>
+                                    
                                     <td class="text-right">
                                         {{ (float) str_replace(['.', ','], ['', '.'], $product->cost_price) * (float) old('products')[$k] }}
                                     </td>
@@ -108,10 +109,12 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> 
+                    Salvar
+                </button>
             </div>
         </div>
     </form>
@@ -223,10 +226,10 @@
                                     type: 'hidden',
                                     name: 'info_products[' + data.id + ']',
                                     value: JSON.stringify(data)
-                                }), data.nome
+                                }), data.name
                             ]),
                             $('<td>', {
-                                class: 'text-right'
+                                class: 'text-center'
                             })
                             .html(data.cost_price)
                             .mask("000.000.000,00", {
@@ -257,7 +260,7 @@
                             })),
                             
                             $('<td>', {
-                                class: 'text-right'
+                                class: 'text-center'
                             }).html(data.cost_price).mask("000.000.000,00", {
                                 reverse: true
                             }).trigger('input'),

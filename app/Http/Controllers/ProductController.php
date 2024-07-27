@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\CompositeProduct;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables; // Server side datatables
+
+use App\Models\Product;
+use App\Models\CompositeProduct;
 
 class ProductController extends Controller
 {
@@ -14,10 +15,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
 
         return view('products.index');
+    
     }
 
     /**
@@ -25,11 +26,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
-
-    {
+    public function create(Request $request) {
         //dd($request->products);
         return view('products.create');
+    
     }
 
     /**
@@ -51,7 +51,9 @@ class ProductController extends Controller
         ];
 
         $feedback = [
+            
             'required' => 'O campo :attribute é obrigatório'
+        
         ];
 
         $request->validate($rules, $feedback);
@@ -64,7 +66,9 @@ class ProductController extends Controller
         $product = new Product();   
         //valida se o preço de venda é menor que o preço de custo
         if($retailPrice < $costPrice) {
+            
             return redirect()->back()->withErrors(['retail_price' => 'O preço de venda deve ser maior que o preço de custo']);
+        
         }
 
         $product->name = $request->name;
@@ -81,6 +85,7 @@ class ProductController extends Controller
             foreach ($request->products as $simple_product_id => $amount) {
                 
                 $simpleProduct = Product::find($simple_product_id);
+                
                 $totalCost += $simpleProduct->cost_price * $amount;
             
             }
@@ -155,7 +160,7 @@ class ProductController extends Controller
 
         $product->name = $request->name;
 
-         //Adiciona no banco o valor de custo do produto composto baseado na quantidade de produtos simples que ele tem
+         //Verifica se o produto é simples e adiciona o valor dele como simples se não, adiciona como produto composto
         if (empty($request->composite)){ 
             
             $product->cost_price = $costPrice ?? null; 
@@ -167,6 +172,7 @@ class ProductController extends Controller
             foreach ($request->products as $simple_product_id => $amount) {
                 
                 $simpleProduct = Product::find($simple_product_id);
+                
                 $totalCost += $simpleProduct->cost_price * $amount;
             
             }
@@ -181,7 +187,9 @@ class ProductController extends Controller
 
         CompositeProduct::where('composite_id', $product->id)->delete();
 
+        //se o produto for composto, atualiza como produto composto
         if (!empty($request->composite)) {
+            
             foreach ($request->products as $simple_products => $amount) {
                
                 $prod = new CompositeProduct();
@@ -219,7 +227,6 @@ class ProductController extends Controller
     {
 
         $products = Product::select(['id', 'name', 'cost_price', 'retail_price', 'composite'])->get();
-
         //dd($products);
         return Datatables::of($products)
             // Traducao bool de composto
