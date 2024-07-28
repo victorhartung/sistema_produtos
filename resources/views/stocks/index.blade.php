@@ -17,9 +17,9 @@
                 <i class="fas fa-plus"></i> 
                 Adicionar produto
             </a>
-        </div>
-
-        @if (!empty(session('success')))
+        </div>  
+    </div>
+    @if (!empty(session('success')))
         <div class="alert alert-success shadow-sm" role="alert">
             {{ session('success') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -27,7 +27,6 @@
             </button>
         </div>
         @endif
-    </div>
     <hr>
     <table class="table table-bordered table-striped" style="width:100%;margin:0px !important" id="stocks-table">
         <thead>

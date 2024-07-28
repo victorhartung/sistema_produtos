@@ -1,6 +1,13 @@
 @extends('layouts.app')
-
 @section('content')
+
+<style>
+    .dataTables_filter {
+        float: right !important;
+    }
+</style>
+
+
     <div class="container">
         <div class="row">
             <div class="col">
@@ -11,14 +18,6 @@
                     <i class="fas fa-plus"></i> 
                     Novo produto
                 </a>
-            </div>
-            <div class="col-md-5">
-                <div class="input-group mb-3 shadow-sm">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                    </div>
-                    <input type="text" class="form-control" id="search" placeholder="Pesquisar" readonly>
-                </div>
             </div>
         </div>
         <hr>
@@ -45,7 +44,7 @@
         @endif
         <div class="row">
             <div class="col-12">
-                <table class="table table-striped table-hover" id="products" style="width:100%;margin:0px !important">
+                <table class="table table-striped table-hover table-bordered" id="products" style="width:100%;margin:0px !important">
                     <thead>
                         <tr>
                             <th class="col-5">Nome</th>
@@ -68,10 +67,9 @@
             var table = $('#products').DataTable({
                 processing: true,
                 serverSide: true,
-                dom: "l<'card't><'row'<'col-sm-5'i><'col-sm-7'p>>",
                 ajax: "{{ route('products.table') }}",
                 columns: [
-                    {data: 'name'},
+                    {data: 'name', name: 'name'},
                     {data: 'type', searchable: false},
                     {data: 'cost_price'},
                     {data: 'retail_price'},
@@ -103,7 +101,6 @@
                     })
                 },
 
-
                 language: {
                     "processing": "A processar...",
                     "lengthMenu": "Exibindo _MENU_ registros",
@@ -120,9 +117,6 @@
                     }
                 },
 
-            });
-            $('#search').on('keyup', function() {
-                table.search(this.value).draw();
             });
         });
     </script>

@@ -7,7 +7,18 @@
     }
 </style>
 
-<div class="container">
+<div class="container"> 
+    <div class="row">
+        <div class="col">
+            <h1>Lista de Usuários</h1>
+        </div>
+        <div class="col-auto">
+            <a href="{{ route('users.create') }}" class="btn btn-success shadow-sm">
+                <i class="fas fa-plus"></i> 
+                Novo Usuário
+            </a>
+        </div>
+    </div>
     @if (!empty(session('success')))
     <div class="alert alert-success shadow-sm" role="alert">
         {{ session('success') }}
@@ -29,19 +40,6 @@
             </ul>
     </div>
     @endif
-    
-    <div class="row">
-        <div class="col">
-            <h1>Lista de Usuários</h1>
-        </div>
-        <div class="col-auto">
-            <a href="{{ route('users.create') }}" class="btn btn-success shadow-sm">
-                <i class="fas fa-plus"></i> 
-                Novo Usuário
-            </a>
-        </div>
-    </div>
-
     <hr>
     <table id="users_table" class="table table-bordered table-striped table-hover">
         <thead>

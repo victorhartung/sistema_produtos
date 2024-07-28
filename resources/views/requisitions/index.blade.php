@@ -19,15 +19,16 @@
             </a>
         </div>
 
-        @if (!empty(session('success')))
+        
+    </div>
+    @if (!empty(session('success')))
         <div class="alert alert-success shadow-sm" role="alert">
             {{ session('success') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        @endif
-    </div>
+    @endif
     <hr>
     <div class="row">
         <div class="col-12">
@@ -69,7 +70,7 @@
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'user.name', name: 'user.name' },
-                    { data: 'type'},
+                    { data: 'type', searchable: false},
                     { data: 'product.name', name: 'product.name' },
                     { data: 'amount', name: 'amount' },
                     { data: 'requisition_date', name: 'requisition_date' },
