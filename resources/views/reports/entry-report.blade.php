@@ -26,8 +26,7 @@
         </thead>
         <tbody>
             @foreach($reportData as $data)
-                <tr>
-    
+                <tr>   
                     <td>{{ $data->product_name }}</td>
                     <td>{{ $data->total_amount }}</td>
                     <td>{{ number_format($data->total_cost_price, 2) }}</td>

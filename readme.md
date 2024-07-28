@@ -40,7 +40,7 @@ php artisan key:generate
 ```
 ## 5º - Inicia o servidor
 ```
-php artisan server
+php artisan ser
 ```
 
 ## Imagens

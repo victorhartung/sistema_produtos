@@ -12,16 +12,17 @@ class StockEntriesReport extends NewExcelFile
     protected $startDate;
     protected $endDate;
 
-
-    public function __construct($startDate, $endDate)
-    {
+    public function __construct($startDate, $endDate) {
+        
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+    
     }
 
-    public function getFilename()
-    {
+    public function getFilename() {
+        
         return 'stock_entries.xlsx';
+    
     }
 
     public function getData() {

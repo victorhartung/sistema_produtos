@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
 
@@ -154,7 +153,6 @@
                 total += parseFloat(subtotal)
                 $('#cost_price').val(parseFloat(total).toFixed(2)).trigger('input');
             });
-
         }
 
         $(document).ready(function() {
@@ -166,13 +164,15 @@
             $('#composite').change(function() {
                 
                 if ($(this).prop('checked')) {
+                    
                     $('#composite_div').show()
-                    $('#cost_price').prop('readonly', true)
-                        .parent().find('label b').html('Preço total de custo')
+                    $('#cost_price').prop('readonly', true).parent().find('label b').html('Preço total de custo');
+                
                 } else {
+                    
                     $('#composite_div').hide()
-                    $('#cost_price').prop('readonly', false)
-                        .parent().find('label b').html('Preço de custo')
+                    $('#cost_price').prop('readonly', false).parent().find('label b').html('Preço de custo');
+                
                 }
             });
             
@@ -190,11 +190,10 @@
                             not: products.map(i => i[`id`])                     
                         }
                        
-                        return query;;
+                        return query;
                     }
                 }
             });
-
             // calculo de custo total
             $('#table_products input[type=number]').change(function() {
                 // Alteracao do subtotal

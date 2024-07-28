@@ -18,10 +18,8 @@ GROUP BY
 
 UNION ALL
 
--- Relatório de Entrada de Estoque para Produtos Compostos
-
-SELECT
-    ps.name AS product_name,
+SELECT                                  -- Relatório de Entrada de Estoque para Produtos Compostos
+    ps.name AS product_name,    
     SUM(r.amount) AS total_amount,
     SUM(r.amount * ps.cost_price) AS total_cost_price,
     SUM(r.amount * ps.retail_price) AS total_retail_price

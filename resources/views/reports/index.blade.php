@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-6">
             <h2>Entrada de Estoque</h2>
-            <form id="form-entry" action="{{ route('get_excel_entries') }}" method="get">
+            <form id="form-entry" action="{{ route('get_excel_entries') }}" method="GET">
                 <div class="form-group">
                     <label for="start_date_entrada">Data Inicial</label>
                     <input type="date" class="form-control" id="start_date_entrada" name="start_date" required>

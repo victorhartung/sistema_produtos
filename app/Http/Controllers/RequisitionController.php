@@ -23,6 +23,7 @@ class RequisitionController extends Controller
         
         $users = User::all();
         $products = Product::all();
+        
         return view('requisitions.create', compact('users', 'products'));
     
     }
@@ -45,7 +46,6 @@ class RequisitionController extends Controller
         //dd($request->all());
         $amount = $request->amount;
         //dd($request->is_exit);
-
         
         $stock = Stock::where('product_id', $request->product_id)->first();
         
@@ -91,6 +91,7 @@ class RequisitionController extends Controller
         Requisition::create($request->all());
         
         return redirect()->route('requisitions.index')->with('success', 'Requisição feita com sucesso!');
+    
     }
 
     public function show(Requisition $requisition) {
@@ -103,11 +104,13 @@ class RequisitionController extends Controller
         
         $users = User::all();
         $products = Product::all();
+        
         return view('requisitions.edit', compact('requisition', 'users', 'products'));
     
     }
 
     public function update(Request $request, Requisition $requisition) {
+        
         $request->validate([
             'user_id' => 'required',
             'product_id' => 'required',
@@ -162,18 +165,22 @@ class RequisitionController extends Controller
         }
 
         $requisition->update($request->all());
+        
         return redirect()->route('requisitions.index')->with('success', 'Requisição atualizada com sucesso.');
+    
     }
 
     public function destroy(Requisition $requisition) {
         
         $requisition->delete();
+        
         return redirect()->route('requisitions.index')->with('success', 'Requisição excluida com sucesso.');
     
     }
 
     //Datatables serverside
     public function getData() {
+        
         $requisitions = Requisition::with('user', 'product')->get();
         
         //dd($requisitions);

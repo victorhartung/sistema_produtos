@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+use App\User;
 
 class UserController extends Controller
 {
@@ -42,7 +43,9 @@ class UserController extends Controller
     }
 
     public function edit(User $user) {
+        
         return view('users.edit', compact('user'));
+    
     }
 
     public function update(Request $request, User $user) {
@@ -59,15 +62,16 @@ class UserController extends Controller
     }
 
     public function destroy(User $user) {
+        
         try{
         
             $user->delete();
+            
             return redirect()->route('users.index')->with('success', 'Usuário excluído com sucesso.');
         
         }catch(\Exception $e) {
 
             return redirect()->back()->withErrors(['error' => 'Usuário está atribuido a alguma requisição, não foi possível excluir este usuário.']);
-        }
-        
+        }     
     }
 }

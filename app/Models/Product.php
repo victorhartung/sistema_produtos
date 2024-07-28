@@ -12,7 +12,6 @@ class Product extends Model
 
     protected $fillable = ['name', 'cost_price', 'retail_price', 'composite'];
 
-
     /**
      * The attributes that should be mutated to dates.
      *
@@ -86,9 +85,9 @@ class Product extends Model
     
     }
 
-     // Verifica se há registros relacionados nas tabelas requisicoes ou estoque se houver registro, impede a exclusão
-    protected static function boot()
-    {
+     // Verifica se há registros relacionados na tabela requisicão ou estoque se houver registro, impede a exclusão
+    protected static function boot() {
+        
         parent::boot();
 
         static::deleting(function ($product) {

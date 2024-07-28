@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 use Yajra\Datatables\Datatables;
+
 use App\Models\Stock;
+use App\Models\Product;
 
 class StockController extends Controller
 {
@@ -48,6 +49,7 @@ class StockController extends Controller
     public function edit(Stock $stock) {
         
         $products = Product::all();
+        
         return view('stocks.edit', compact('stock', 'products'));
     
     }
@@ -66,12 +68,14 @@ class StockController extends Controller
         ]);
 
         $stock->update($request->all());
+        
         return redirect()->route('stocks.index')->with('success', 'Estoque atualizado com sucesso.');
     }
 
     public function destroy(Stock $stock) {
        
         $stock->delete();
+        
         return redirect()->route('stocks.index')->with('success', 'Item excluído com sucesso.');
     
     }

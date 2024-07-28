@@ -8,8 +8,8 @@ use Yajra\Datatables\Datatables; // Server side datatables
 use App\Models\Product;
 use App\Models\CompositeProduct;
 
-class ProductController extends Controller
-{
+class ProductController extends Controller {
+    
     /**
      * Display a listing of the resource.
      *
@@ -58,8 +58,8 @@ class ProductController extends Controller
 
         $request->validate($rules, $feedback);
 
-        //adiciona o produto simples
-
+   
+        //desfaz a máscara
         $costPrice = str_replace(['.', ','], ['', '.'], $request->cost_price);
         $retailPrice = str_replace(['.', ','], ['', '.'], $request->retail_price);
         
@@ -111,6 +111,7 @@ class ProductController extends Controller
         }
 
         return redirect()->route('products.index')->with('success', 'Produto criado com sucesso!');
+    
     }
 
     /**
@@ -205,6 +206,7 @@ class ProductController extends Controller
         }
 
         return redirect()->route('products.index')->with('success', 'Produto atualizado com sucesso!');
+    
     }
 
     /**
@@ -228,9 +230,7 @@ class ProductController extends Controller
 
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         
-        }
-
-        
+        }      
     }
 
     /**

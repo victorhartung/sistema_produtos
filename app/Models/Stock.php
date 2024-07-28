@@ -18,8 +18,9 @@ class Stock extends Model
     protected $fillable = ['product_id', 'amount']; 
 
     //relacionamento com produto
-    public function product()
-    {
+    public function product() {
+        
         return $this->belongsTo(Product::class);
+    
     }
 }
