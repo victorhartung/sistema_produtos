@@ -40,7 +40,7 @@ CREATE TABLE requisitions(
     product_id INT NOT NULL,
     amount INT(11) NOT NULL,
     requisition_date DATETIME NOT NULL,
-    is_exit BOOLEAN,   --falso para entrada verdadeiro para saída
+    is_exit BOOLEAN,   -- falso para entrada verdadeiro para saída
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id),
     CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(id)
 
