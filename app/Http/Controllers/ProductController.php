@@ -58,7 +58,6 @@ class ProductController extends Controller {
 
         $request->validate($rules, $feedback);
 
-   
         //desfaz a máscara
         $costPrice = str_replace(['.', ','], ['', '.'], $request->cost_price);
         $retailPrice = str_replace(['.', ','], ['', '.'], $request->retail_price);
@@ -284,6 +283,7 @@ class ProductController extends Controller {
             $search = $search->get();
 
             return ["results" => $search]; // Retorno na forma da biblioteca select2
+
         }
     }
 }
