@@ -47,14 +47,19 @@ class RequisitionController extends Controller
         $amount = $request->amount;
         //dd($request->is_exit);
         
+
+        $compositeProducts = DB::table('composite_products')
+        ->where('composite_id', $request->product_id)
+        ->get();
         $stock = Stock::where('product_id', $request->product_id)->first();
-        
+        // $componentStock = Stock::where('product_id');
+
         //verifica se existe o produto requisitado cadastrado no estoque
-        if(!$stock) {
+        // if(!$stock || ) {
                     
-            return redirect()->back()->withErrors(['error' => 'Não há produtos cadastrados para esse tipo de requisição']);
+        //     return redirect()->back()->withErrors(['error' => 'Não há produtos cadastrados para esse tipo de requisição']);
         
-        }
+        // }
 
         if($request->is_exit) {
             //verifica se há quantidade disponível para produto simples
